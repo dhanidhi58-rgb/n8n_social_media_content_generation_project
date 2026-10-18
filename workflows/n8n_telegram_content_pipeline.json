@@ -15,7 +15,7 @@
       "typeVersion": 1.5,
       "position": [
         208,
-        320
+        288
       ],
       "retryOnFail": true,
       "webhookId": "7b7f1082-09cc-46f5-84d6-ae5d120492bd",
@@ -58,7 +58,7 @@
       "typeVersion": 4.7,
       "position": [
         832,
-        160
+        112
       ],
       "credentials": {
         "googleSheetsOAuth2Api": {
@@ -89,7 +89,7 @@
           "value": {
             "Content_ID": "={{ $(\"Analyzer\").item.json.Content_ID }}",
             "Approval_Status": "={{ $(\"Analyzer\").item.json.Approval_Status }}",
-            "Approved_At": "={{ $(\"Analyzer\").item.json.approved_at }}"
+            "Approved_At": "={{ $now.format('yyyy-MM-dd HH:mm:ss') }}"
           },
           "matchingColumns": [
             "Content_ID"
@@ -209,7 +209,7 @@
       "typeVersion": 4.7,
       "position": [
         992,
-        160
+        112
       ],
       "retryOnFail": true,
       "credentials": {
@@ -396,7 +396,7 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        1216,
+        1104,
         704
       ],
       "credentials": {
@@ -459,8 +459,8 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        1360,
-        96
+        1392,
+        32
       ],
       "id": "f0312f4f-3b15-430f-95a8-9c9b286ff188",
       "name": "Send a text message1",
@@ -475,14 +475,14 @@
     {
       "parameters": {
         "chatId": "={{ $('Telegram Trigger').first().json.message.chat.id }}",
-        "text": "=❌ **Content rejected!**\n\nContent ID: {{ $('Analyzer').item.json.content_id }}\n\nThank you for your feedback!\n\nIf you have any suggestions or specific changes you'd like to see in the post, please share them with me.\n\nOtherwise, I'll try to generate a new version of the post for your review.\n\nPlease let me know how you'd like to proceed. 😊",
+        "text": "=❌ **Content rejected!**\n\nContent ID: {{ $('Analyzer').item.json.content_id }}\n\nThank you for your feedback!\n\nIf you have any suggestions or specific changes you'd like to see in the post, please share them with me.\n\nPlease let me know how you'd like to proceed. 😊",
         "additionalFields": {}
       },
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        1360,
-        256
+        1392,
+        192
       ],
       "id": "f952a5ea-a85a-4f94-9762-c0800442a7e5",
       "name": "Send a text message",
@@ -496,7 +496,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const data = $input.first().json;\n\n// Telegram message extract\nconst message = String(\n  data.message?.text ??\n  data.text ??\n  \"\"\n).trim();\n\n// Chat ID extract\nconst chat_id =\n  data.message?.chat?.id ??\n  data.chat?.id ??\n  data.chat_id;\n\n// Validate message\nif (!message) {\n  throw new Error(\"Telegram message nahi mila.\");\n}\n\nif (chat_id === undefined || chat_id === null) {\n  throw new Error(\"Chat ID nahi mili.\");\n}\n\n// Regex to extract APPROVE/REJECT and Content ID (e.g. 363-7)\nconst match = message.match(/(APPROVE|REJECT)\\s+(\\d+-\\d+)/i);\n\nif (!match) {\n  throw new Error(\n    \"Invalid command. Telegram par APPROVE 46-1 ya REJECT 46-1 bhejo.\"\n  );\n}\n\nconst action = match[1].toUpperCase();\nconst contentId = match[2];\n\nconst approvalStatus =\n  action === \"APPROVE\" ? \"Approved\" : \"Rejected\";\n\nconst approvedAt =\n  action === \"APPROVE\"\n    ? new Date().toLocaleString(\"sv-SE\", {\n        timeZone: \"Asia/Kolkata\"\n      }).replace(\" \", \"T\")\n    : \"\";\n\n// Output matching your exact Google Sheets columns and workflow needs\nreturn [\n  {\n    json: {\n      action: action,\n      content_id: contentId,            // Telegram nodes ke liye\n      Content_ID: contentId,            // Google Sheet column match\n      Approval_Status: approvalStatus,  // Google Sheet column match\n      chat_id: chat_id,\n      Approved_At: approvedAt           // Google Sheet column match\n    }\n  }\n];"
+        "jsCode": "const data = $input.first().json;\n\n// Telegram message extract\nconst message = String(\n  data.message?.text ??\n  data.text ??\n  \"\"\n).trim();\n\n// Chat ID extract\nconst chat_id =\n  data.message?.chat?.id ??\n  data.chat?.id ??\n  data.chat_id;\n\n// Validate message\nif (!message) {\n  throw new Error(\"Telegram message nahi mila.\");\n}\n\nif (chat_id === undefined || chat_id === null) {\n  throw new Error(\"Chat ID nahi mili.\");\n}\n\n// Regex to extract APPROVE/REJECT and Content ID (e.g. 363-7)\nconst match = message.match(/(APPROVE|REJECT)\\s+(\\d+-\\d+)/i);\n\nif (!match) {\n  throw new Error(\n    \"Invalid command. Telegram par APPROVE 46-1 ya REJECT 46-1 bhejo.\"\n  );\n}\n\nconst action = match[1].toUpperCase();\nconst contentId = match[2];\n\nconst approvalStatus =\n  action === \"APPROVE\" ? \"Approved\" : \"Rejected\";\n\n// Agar Approve ho toh Kolkata timestamp, agar Reject ho toh Blank String \"\"\nconst approvedAt =\n  action === \"APPROVE\"\n    ? new Date().toLocaleString(\"sv-SE\", {\n        timeZone: \"Asia/Kolkata\"\n      }).replace(\" \", \"T\")\n    : \"\";\n\n// Agar Reject ho toh Scheduled Date ko bhi blank string \"\" kar do\nconst scheduledDate = action === \"REJECT\" ? \"\" : undefined;\n\n// Output matching your exact Google Sheets columns and workflow needs\nreturn [\n  {\n    json: {\n      action: action,\n      content_id: contentId,            // Telegram nodes ke liye\n      Content_ID: contentId,            // Google Sheet column match\n      Approval_Status: approvalStatus,  // Google Sheet column match\n      chat_id: chat_id,\n      Approved_At: approvedAt,          // Google Sheet column match (Rejection par blank)\n      Scheduled_Date: scheduledDate      // Google Sheet column match (Rejection par blank)\n    }\n  }\n];"
       },
       "id": "c4f9be51-cdf4-4618-833d-38f57c5ec421",
       "name": "Analyzer",
@@ -504,7 +504,7 @@
       "typeVersion": 2,
       "position": [
         672,
-        160
+        112
       ]
     },
     {
@@ -536,7 +536,7 @@
       "typeVersion": 2.3,
       "position": [
         1152,
-        160
+        112
       ],
       "id": "ecada1d9-973c-4226-871c-9140fa4e06fc",
       "name": "If"
@@ -550,7 +550,7 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        992,
+        896,
         704
       ],
       "id": "375be376-d99b-46c2-b926-24b8d4b32147",
@@ -562,6 +562,275 @@
           "name": "Telegram account 2"
         }
       }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1Z9V2c8vu9xLMVIiAg7fxlgfp2pNUmFyJb1LOwWs-IUE",
+          "mode": "list",
+          "cachedResultName": "Social Media Content Pipeline",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Z9V2c8vu9xLMVIiAg7fxlgfp2pNUmFyJb1LOwWs-IUE/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Content_Draft",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Z9V2c8vu9xLMVIiAg7fxlgfp2pNUmFyJb1LOwWs-IUE/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Content_ID": "={{ $json.Content_ID }}",
+            "Approval_Status": "={{ $json.Approval_Status }}",
+            "Approved_At": "={{ $json.Approved_At }}",
+            "Scheduled_Date": "={{ $json.Scheduled_Date }}"
+          },
+          "matchingColumns": [
+            "Content_ID"
+          ],
+          "schema": [
+            {
+              "id": "Content_ID",
+              "displayName": "Content_ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Content_Idea",
+              "displayName": "Content_Idea",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Target_Audience",
+              "displayName": "Target_Audience",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Brand_Tone",
+              "displayName": "Brand_Tone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "LinkedIn_Post",
+              "displayName": "LinkedIn_Post",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "X_Thread",
+              "displayName": "X_Thread",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Instagram_Caption",
+              "displayName": "Instagram_Caption",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Approval_Status",
+              "displayName": "Approval_Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Scheduled_Date",
+              "displayName": "Scheduled_Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Approved_At",
+              "displayName": "Approved_At",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1408,
+        336
+      ],
+      "id": "330b5e04-647a-4358-9232-c20ad272cf2f",
+      "name": "Update row in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "5nPCRzd8SARwWkeJ",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Safely input data get karein\nconst inputItem = $input.first()?.json || {};\n\n// Text extract karein\nconst message = String(\n  inputItem.message?.text ??\n  inputItem.body?.message?.text ??\n  inputItem.text ??\n  inputItem.body?.text ??\n  inputItem.Content_ID ??\n  inputItem.content_id ??\n  \"\"\n).trim();\n\n// Chat ID extract karein\nconst chat_id =\n  inputItem.message?.chat?.id ??\n  inputItem.body?.message?.chat?.id ??\n  inputItem.chat?.id ??\n  inputItem.body?.chat?.id ??\n  inputItem.chat_id ??\n  null;\n\n// Extract Content ID (e.g. 105-1)\nlet contentId = \"\";\nconst match = message.match(/^REJECT\\s+(\\d+-\\d+)$/i);\n\nif (match) {\n  contentId = match[1];\n} else {\n  const idMatch = message.match(/(\\d+-\\d+)/);\n  contentId = idMatch ? idMatch[1] : message;\n}\n\nif (!contentId) {\n  throw new Error(\"Content ID nahi mil pa rahi hai.\");\n}\n\nreturn [\n  {\n    json: {\n      Content_ID: contentId,\n      Approval_Status: \"Rejected\",\n      Approved_At: \" \",      // Single space -> Sheet ka purana time permanently erase kar dega\n      Scheduled_Date: \" \",   // Single space -> Sheet ki purani date permanently erase kar dega\n      chat_id: chat_id\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1248,
+        336
+      ],
+      "id": "3a3a06e9-820e-4efc-9c69-724edc3d9649",
+      "name": "Schedule_Analyzer"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        656,
+        688
+      ],
+      "id": "357c3dbd-4a52-4b1e-b4de-150e0e9a7a13",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "YmDXtx24wl2n97wQ",
+          "name": "Google Gemini(PaLM) Api account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Telegram Trigger').first().json.message?.text?.toLowerCase() || '' }}",
+                    "rightValue": "approve",
+                    "operator": {
+                      "type": "string",
+                      "operation": "startsWith"
+                    },
+                    "id": "82b8a4d1-087b-4497-abc9-2ec45272ebbd"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "be3da333-e5ee-4b20-9e3e-b0de9a581d1f",
+                    "leftValue": "={{ $('Telegram Trigger').first().json.message?.text?.toLowerCase() || '' }}",
+                    "rightValue": "reject",
+                    "operator": {
+                      "type": "string",
+                      "operation": "startsWith"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "7792ac03-dbf9-4b86-96e6-8a272e3cc462",
+                    "leftValue": "={{ $('Telegram Trigger').first().json.message?.text?.toLowerCase() || '' }}",
+                    "rightValue": "schedule",
+                    "operator": {
+                      "type": "string",
+                      "operation": "startsWith"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        400,
+        256
+      ],
+      "id": "b40ad51a-8b6d-4106-a973-70fd7113313b",
+      "name": "Switch"
     },
     {
       "parameters": {
@@ -701,11 +970,11 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        848,
-        336
+        832,
+        304
       ],
-      "id": "330b5e04-647a-4358-9232-c20ad272cf2f",
-      "name": "Update row in sheet1",
+      "id": "4a8ef7c5-cff8-43a1-955b-dea8a0d7fe1e",
+      "name": "Update row in sheet2",
       "credentials": {
         "googleSheetsOAuth2Api": {
           "id": "5nPCRzd8SARwWkeJ",
@@ -715,18 +984,18 @@
     },
     {
       "parameters": {
-        "chatId": "={{ $('Schedule_Analyzer').first().json.chat_id }}",
+        "chatId": "={{ $('Schedule_Analyzer1').first().json.chat_id }}",
         "text": "={{ '✅ Content scheduled successfully!\\n\\nContent ID: ' + $json.Content_ID + '\\nScheduled Date & Time: ' + $json.Scheduled_Date }}",
         "additionalFields": {}
       },
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        1040,
-        336
+        992,
+        304
       ],
-      "id": "a56bf467-33e6-4fe6-b007-4bebbb8cde7d",
-      "name": "Send a text message5",
+      "id": "2ecbcc5b-d3bb-49cd-8524-1b0e3b614cb4",
+      "name": "Send a text message6",
       "webhookId": "b37cf08d-c2a9-4f34-a5fa-a2024fdaabe9",
       "credentials": {
         "telegramApi": {
@@ -743,114 +1012,10 @@
       "typeVersion": 2,
       "position": [
         672,
-        336
+        304
       ],
-      "id": "3a3a06e9-820e-4efc-9c69-724edc3d9649",
-      "name": "Schedule_Analyzer"
-    },
-    {
-      "parameters": {
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
-      "typeVersion": 1.2,
-      "position": [
-        656,
-        688
-      ],
-      "id": "357c3dbd-4a52-4b1e-b4de-150e0e9a7a13",
-      "name": "Google Gemini Chat Model",
-      "credentials": {
-        "googlePalmApi": {
-          "id": "YmDXtx24wl2n97wQ",
-          "name": "Google Gemini(PaLM) Api account 3"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "rules": {
-          "values": [
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict",
-                  "version": 3
-                },
-                "conditions": [
-                  {
-                    "leftValue": "={{ $('Telegram Trigger').first().json.message?.text?.toLowerCase() || '' }}",
-                    "rightValue": "approve",
-                    "operator": {
-                      "type": "string",
-                      "operation": "startsWith"
-                    },
-                    "id": "82b8a4d1-087b-4497-abc9-2ec45272ebbd"
-                  }
-                ],
-                "combinator": "and"
-              }
-            },
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict",
-                  "version": 3
-                },
-                "conditions": [
-                  {
-                    "id": "be3da333-e5ee-4b20-9e3e-b0de9a581d1f",
-                    "leftValue": "={{ $('Telegram Trigger').first().json.message?.text?.toLowerCase() || '' }}",
-                    "rightValue": "reject",
-                    "operator": {
-                      "type": "string",
-                      "operation": "startsWith"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              }
-            },
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict",
-                  "version": 3
-                },
-                "conditions": [
-                  {
-                    "id": "7792ac03-dbf9-4b86-96e6-8a272e3cc462",
-                    "leftValue": "={{ $('Telegram Trigger').first().json.message?.text?.toLowerCase() || '' }}",
-                    "rightValue": "schedule",
-                    "operator": {
-                      "type": "string",
-                      "operation": "startsWith"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              }
-            }
-          ]
-        },
-        "options": {
-          "fallbackOutput": "extra"
-        }
-      },
-      "type": "n8n-nodes-base.switch",
-      "typeVersion": 3.4,
-      "position": [
-        400,
-        288
-      ],
-      "id": "b40ad51a-8b6d-4106-a973-70fd7113313b",
-      "name": "Switch"
+      "id": "683a2e9a-bcf8-455d-90e2-995617dc7aa0",
+      "name": "Schedule_Analyzer1"
     }
   ],
   "pinData": {},
@@ -958,19 +1123,18 @@
             "node": "Send a text message",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Schedule_Analyzer",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
     },
     "Update row in sheet1": {
       "main": [
-        [
-          {
-            "node": "Send a text message5",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Schedule_Analyzer": {
@@ -1013,7 +1177,7 @@
         ],
         [
           {
-            "node": "Schedule_Analyzer",
+            "node": "Schedule_Analyzer1",
             "type": "main",
             "index": 0
           }
@@ -1026,6 +1190,38 @@
           }
         ]
       ]
+    },
+    "Send a text message": {
+      "main": [
+        []
+      ]
+    },
+    "Update row in sheet2": {
+      "main": [
+        [
+          {
+            "node": "Send a text message6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule_Analyzer1": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a text message1": {
+      "main": [
+        []
+      ]
     }
   },
   "active": true,
@@ -1036,7 +1232,7 @@
     "callerPolicy": "workflowsFromSameOwner",
     "availableInMCP": false
   },
-  "versionId": "0703d439-420c-405f-a5e5-a123cacc58a1",
+  "versionId": "2e23aec0-4a21-433c-930f-885f02d6618a",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "474fa557ee8f534137f25afd86b5eadb2ab268153676a35b219d84c361ac9a3c"
