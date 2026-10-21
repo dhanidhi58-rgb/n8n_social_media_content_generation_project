@@ -1,6 +1,6 @@
 
 {
-  "name": "My workflow 3",
+  "name": "n8n_social_media_Content_generation_pipeline",
   "nodes": [
     {
       "parameters": {
@@ -232,8 +232,8 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 3.1,
       "position": [
-        656,
-        512
+        496,
+        528
       ],
       "onError": "continueErrorOutput"
     },
@@ -246,165 +246,9 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        960,
-        496
+        896,
+        624
       ]
-    },
-    {
-      "parameters": {
-        "operation": "appendOrUpdate",
-        "documentId": {
-          "__rl": true,
-          "value": "1Z9V2c8vu9xLMVIiAg7fxlgfp2pNUmFyJb1LOwWs-IUE",
-          "mode": "list",
-          "cachedResultName": "Social Media Content Pipeline",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Z9V2c8vu9xLMVIiAg7fxlgfp2pNUmFyJb1LOwWs-IUE/edit?usp=drivesdk"
-        },
-        "sheetName": {
-          "__rl": true,
-          "value": "gid=0",
-          "mode": "list",
-          "cachedResultName": "Content_Draft",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Z9V2c8vu9xLMVIiAg7fxlgfp2pNUmFyJb1LOwWs-IUE/edit#gid=0"
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "Content_ID": "={{ $json.Content_ID }}",
-            "Content_Idea": "={{ $json.Content_Idea }}",
-            "Approval_Status": "={{ $json.Approval_Status }}",
-            "LinkedIn_Post": "={{ $json.LinkedIn_Post }}",
-            "X_Thread": "={{ $json.X_Thread }}",
-            "Instagram_Caption": "={{ $json.Instagram_Caption }}",
-            "Target_Audience": "={{ $json.Target_Audience }}",
-            "Brand_Tone": "={{ $json.Brand_Tone }}",
-            "Approved_At": "={{ $json.Approved_At }}",
-            "Scheduled_Date": "={{ $json.Scheduled_Date}}"
-          },
-          "matchingColumns": [
-            "Content_ID"
-          ],
-          "schema": [
-            {
-              "id": "Content_ID",
-              "displayName": "Content_ID",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "Content_Idea",
-              "displayName": "Content_Idea",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "Target_Audience",
-              "displayName": "Target_Audience",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "Brand_Tone",
-              "displayName": "Brand_Tone",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "LinkedIn_Post",
-              "displayName": "LinkedIn_Post",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "X_Thread",
-              "displayName": "X_Thread",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "Instagram_Caption",
-              "displayName": "Instagram_Caption",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "Approval_Status",
-              "displayName": "Approval_Status",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "Approved_At",
-              "displayName": "Approved_At",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "Scheduled_Date",
-              "displayName": "Scheduled_Date",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        },
-        "options": {}
-      },
-      "id": "ed008b36-a735-43d0-a46b-cdc839bcb1b1",
-      "name": "Append or update row in sheet",
-      "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4.7,
-      "position": [
-        1104,
-        704
-      ],
-      "credentials": {
-        "googleSheetsOAuth2Api": {
-          "id": "5nPCRzd8SARwWkeJ",
-          "name": "Google Sheets account"
-        }
-      }
     },
     {
       "parameters": {
@@ -417,8 +261,8 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        1120,
-        496
+        1056,
+        624
       ],
       "webhookId": "e4735732-a427-4cff-809f-c27175593d69",
       "credentials": {
@@ -439,8 +283,8 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        1280,
-        496
+        1248,
+        624
       ],
       "webhookId": "c0f9a812-059d-4ec9-873b-d995984c0a4e",
       "credentials": {
@@ -459,7 +303,7 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        1392,
+        1376,
         32
       ],
       "id": "f0312f4f-3b15-430f-95a8-9c9b286ff188",
@@ -481,7 +325,7 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        1392,
+        1376,
         192
       ],
       "id": "f952a5ea-a85a-4f94-9762-c0800442a7e5",
@@ -544,13 +388,13 @@
     {
       "parameters": {
         "chatId": "={{ $('Telegram Trigger').first().json.message.chat.id }}",
-        "text": "=⚠️ Content Generation Failed\n\nSorry, I couldn't generate your social media content because the AI service encountered an error.\n\nYour AI service is temporarily unavailable or has reached its usage limit.\n\nPlease try again later.",
+        "text": "=⚠️ Content Generation Failed\n\nSorry, I couldn't generate your social media content because the AI service encountered an error.\n\nYour AI service is temporarily unavailable or has reached its usage limit.\n\n📝 **Your Original Idea:**\n> {{ $json.original_message }}\n\nPlease try again later.",
         "additionalFields": {}
       },
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        896,
+        752,
         704
       ],
       "id": "375be376-d99b-46c2-b926-24b8d4b32147",
@@ -735,8 +579,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1.2,
       "position": [
-        656,
-        688
+        496,
+        720
       ],
       "id": "357c3dbd-4a52-4b1e-b4de-150e0e9a7a13",
       "name": "Google Gemini Chat Model",
@@ -1006,7 +850,7 @@
     },
     {
       "parameters": {
-        "jsCode": "\nconst data = $input.first().json;\n\nconst message = String(\n  data.message?.text ?? data.text ?? \"\"\n).trim();\n\n// Format: SCHEDULE 105-1 | 2026-10-20 18:30\nconst match = message.match(\n  /^SCHEDULE\\s+(\\d+-\\d+)\\s*\\|\\s*(\\d{4}-\\d{2}-\\d{2})\\s+(\\d{2}:\\d{2})$/i\n);\n\nif (!match) {\n  throw new Error(\n    \"Invalid format. Use: SCHEDULE 105-1 | 2026-10-20 18:30\"\n  );\n}\n\nconst chat_id =\n  data.message?.chat?.id ??\n  data.chat?.id ??\n  data.chat_id;\n\nif (chat_id === undefined || chat_id === null) {\n  throw new Error(\"Chat ID nahi mili.\");\n}\n\nreturn [\n  {\n    json: {\n      Content_ID: match[1],\n      Scheduled_Date: `${match[2]} ${match[3]}`,\n      chat_id: chat_id\n    }\n  }\n];\n"
+        "jsCode": "const data = $input.first().json;\n\nconst message = String(\n  data.message?.text ?? data.text ?? \"\"\n).trim();\n\n// Format: SCHEDULE 105-1 | 2026-10-20 18:30\nconst match = message.match(\n  /^SCHEDULE\\s+(\\d+-\\d+)\\s*\\|\\s*(\\d{4}-\\d{2}-\\d{2})\\s+(\\d{2}:\\d{2})$/i\n);\n\nif (!match) {\n  throw new Error(\n    \"Invalid format. Use: SCHEDULE 105-1 | 2026-10-20 18:30\"\n  );\n}\n\nconst chat_id =\n  data.message?.chat?.id ??\n  data.chat?.id ??\n  data.chat_id;\n\nif (chat_id === undefined || chat_id === null) {\n  throw new Error(\"Chat ID nahi mili.\");\n}\n\nconst contentId = match[1];\nconst dateStr = match[2]; // 2026-10-20\nconst timeStr = match[3]; // 18:30\n\n// Google Calendar ke liye ISO Start Time\nconst startTime = `${dateStr}T${timeStr}:00`;\n\n// 1 ghante ka duration set karne ke liye End Time\nconst startDate = new Date(`${dateStr}T${timeStr}:00`);\nstartDate.setHours(startDate.getHours() + 1);\nconst hours = String(startDate.getHours()).padStart(2, '0');\nconst minutes = String(startDate.getMinutes()).padStart(2, '0');\nconst endTime = `${dateStr}T${hours}:${minutes}:00`;\n\nreturn [\n  {\n    json: {\n      Content_ID: contentId,\n      Scheduled_Date: `${dateStr} ${timeStr}`,\n      summary: `Content ID: ${contentId} Schedule`,\n      description: `Scheduled via Telegram bot for content ID ${contentId}`,\n      start_time: startTime,\n      end_time: endTime,\n      chat_id: chat_id\n    }\n  }\n];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -1016,6 +860,181 @@
       ],
       "id": "683a2e9a-bcf8-455d-90e2-995617dc7aa0",
       "name": "Schedule_Analyzer1"
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "dhanidhi58@gmail.com",
+          "mode": "list",
+          "cachedResultName": "dhanidhi58@gmail.com"
+        },
+        "start": "={{ $json.start_time }}",
+        "end": "={{ $json.end_time }}",
+        "additionalFields": {
+          "description": "={{ $json.description }}",
+          "summary": "={{ $json.summary }}"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1.3,
+      "position": [
+        800,
+        464
+      ],
+      "id": "d50f1105-2008-4236-8476-436c267d2555",
+      "name": "Create an event",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "70k4D59dbM8ZcnZJ",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1Z9V2c8vu9xLMVIiAg7fxlgfp2pNUmFyJb1LOwWs-IUE",
+          "mode": "list",
+          "cachedResultName": "Social Media Content Pipeline",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Z9V2c8vu9xLMVIiAg7fxlgfp2pNUmFyJb1LOwWs-IUE/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Content_Draft",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Z9V2c8vu9xLMVIiAg7fxlgfp2pNUmFyJb1LOwWs-IUE/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Content_ID": "={{ $(\"Code\").item.json.Content_ID }}",
+            "Target_Audience": "={{ $json.Target_Audience }}",
+            "Content_Idea": "={{ $json.Content_Idea }}",
+            "Brand_Tone": "={{ $json.Brand_Tone }}",
+            "LinkedIn_Post": "={{ $json.LinkedIn_Post }}",
+            "X_Thread": "={{ $json.X_Thread }}",
+            "Instagram_Caption": "={{ $json.Instagram_Caption }}",
+            "Approval_Status": "={{ $json.Approval_Status }}"
+          },
+          "matchingColumns": [
+            "Content_ID"
+          ],
+          "schema": [
+            {
+              "id": "Content_ID",
+              "displayName": "Content_ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Content_Idea",
+              "displayName": "Content_Idea",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Target_Audience",
+              "displayName": "Target_Audience",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Brand_Tone",
+              "displayName": "Brand_Tone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "LinkedIn_Post",
+              "displayName": "LinkedIn_Post",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "X_Thread",
+              "displayName": "X_Thread",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Instagram_Caption",
+              "displayName": "Instagram_Caption",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Approval_Status",
+              "displayName": "Approval_Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Scheduled_Date",
+              "displayName": "Scheduled_Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Approved_At",
+              "displayName": "Approved_At",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1040,
+        800
+      ],
+      "id": "2c38fbaf-017a-4c36-837b-a9616ab01a66",
+      "name": "Append or update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "5nPCRzd8SARwWkeJ",
+          "name": "Google Sheets account"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -1064,12 +1083,12 @@
       "main": [
         [
           {
-            "node": "Append or update row in sheet",
+            "node": "Send a text message2",
             "type": "main",
             "index": 0
           },
           {
-            "node": "Send a text message2",
+            "node": "Append or update row in sheet",
             "type": "main",
             "index": 0
           }
@@ -1214,6 +1233,11 @@
             "node": "Update row in sheet2",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Create an event",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -1232,7 +1256,7 @@
     "callerPolicy": "workflowsFromSameOwner",
     "availableInMCP": false
   },
-  "versionId": "2e23aec0-4a21-433c-930f-885f02d6618a",
+  "versionId": "5aa27fd3-ca90-48b3-bb70-3d77475669b8",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "474fa557ee8f534137f25afd86b5eadb2ab268153676a35b219d84c361ac9a3c"
