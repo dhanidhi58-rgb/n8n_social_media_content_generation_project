@@ -9,20 +9,20 @@
         ],
         "additionalFields": {}
       },
-      "id": "ad61065d-aaa0-4d80-980d-b638fa16c637",
+      "id": "596edcc4-5c5a-46ce-946f-c4757fc6a5e5",
       "name": "Telegram Trigger",
       "type": "n8n-nodes-base.telegramTrigger",
       "typeVersion": 1.5,
       "position": [
-        208,
-        288
+        0,
+        256
       ],
       "retryOnFail": true,
       "webhookId": "7b7f1082-09cc-46f5-84d6-ae5d120492bd",
       "credentials": {
         "telegramApi": {
-          "id": "lRU2BwpGaXgMPbuC",
-          "name": "Telegram account 2"
+          "id": "HPUd49h5Q5fC0beN",
+          "name": "Telegram account"
         }
       }
     },
@@ -52,17 +52,17 @@
         },
         "options": {}
       },
-      "id": "1110da46-cc46-4f12-9c06-c8a73be0cca1",
+      "id": "2da1912c-5efb-4456-a4a7-a4dfa9e56765",
       "name": "Get row(s) in sheet",
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        832,
-        112
+        624,
+        80
       ],
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "5nPCRzd8SARwWkeJ",
+          "id": "enyKgV108mZPDA2D",
           "name": "Google Sheets account"
         }
       }
@@ -203,18 +203,18 @@
         },
         "options": {}
       },
-      "id": "0fd5e388-036d-4fba-b300-fa6287151a04",
+      "id": "34b36ec3-59fe-4e60-9aa6-84def2b5ad8f",
       "name": "Update row in sheet",
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        992,
-        112
+        784,
+        80
       ],
       "retryOnFail": true,
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "5nPCRzd8SARwWkeJ",
+          "id": "enyKgV108mZPDA2D",
           "name": "Google Sheets account"
         }
       }
@@ -222,53 +222,53 @@
     {
       "parameters": {
         "promptType": "define",
-        "text": "=You are a professional social media content strategist.\n\nUSER BRIEF:\n{{ $('Telegram Trigger').first().json.message.text }}\n\nRead the user's brief and identify the content idea, target audience, and brand tone.\n\nGenerate a 7-day social media content plan based on the user's main idea.\n\nIMPORTANT:\n- Generate exactly 7 sections: DAY 1 through DAY 7.\n- Each day must have a unique topic related to the original idea.\n- Each day must contain a LinkedIn post, an X thread of 4 connected posts, and an Instagram caption.\n- Do not invent facts, statistics, or unsupported claims.\n- Return the actual written content, not placeholders.\n- Do not return JSON, Markdown tables, or introductory text.\n\nUse these exact headings and this exact structure for every day:\n\nDAY 1\nTopic: [topic]\n\nLinkedIn Post:\n[Complete LinkedIn post]\n\nX Thread:\n1/4 [Post 1]\n2/4 [Post 2]\n3/4 [Post 3]\n4/4 [Post 4]\n\nInstagram Caption:\n[Complete Instagram caption with relevant hashtags]\n\nRepeat this structure for DAY 2, DAY 3, DAY 4, DAY 5, DAY 6, and DAY 7.\n\nDo not comit any day or platform. Keep each platform heading on a separate line. Replace all bracketed instructions with actual content.",
+        "text": "=You are an expert social media content strategist.\n\nUSER BRIEF:\n{{ $json.message.text }}\n\nTASK:\n1. Extract the main Content Idea, Target Audience, and Brand Tone from the user brief.\n2. Generate a 7-day ASCENDING VALUE LADDER social media campaign based on the main idea.\n3. All content Generated should be different for each day, from day 1 to day 7.\n\n\nCRITICAL ANTI-REPETITION RULE:\n- NEVER copy-paste or repeat text across days.\n- EVERY SINGLE DAY MUST HAVE 100% DIFFERENT WRITTEN CONTENT, HOOKS, AND EXAMPLES.\n- Follow the EXACT daily focus assigned below for each day.\n\nDAILY CONTENT PLAN (DO NOT DEVIATE):\n- DAY 1 (The Core Concept & Mindset Shift): Introduce why this topic matters right now and the foundational change.\n- DAY 2 (Practical Step-by-Step Execution): Give a concrete \"How-To\" guide with immediate, actionable steps.\n- DAY 3 (Common Mistakes & Misconceptions): Detail 3 major errors people make regarding this idea and how to avoid them.\n- DAY 4 (Advanced Pro Tactics & Best Tools): Share pro-level techniques, specific tools, or expert workflows.\n- DAY 5 (Debunking Myths & Alternative Views): Present a counter-intuitive perspective or bust a popular industry myth.\n- DAY 6 (Future Outlook & Trending News): Discuss current trends, upcoming shifts, and future predictions.\n- DAY 7 (Weekly Roadmap & Strong Action CTA): Summarize key takeaways into a quick cheatsheet with a strong final call to action.\n\nOUTPUT FORMATTING RULES:\n- Generate EXACTLY 7 sections: DAY 1 through DAY 7.\n- Do NOT include markdown tables, JSON, intro/outro text, or horizontal dividing lines (---).\n- Output complete, unique drafts for LinkedIn, X Thread (1/4 to 4/4), and Instagram Caption for all 7 days.\n\nUse this EXACT layout for all 7 days but generate different content for all 7 days. No two day content should be same text:\n\nDAY 1\n\nLinkedIn Post:\n[Write complete, unique LinkedIn post about Day 1 Core Concept]\n\nX Thread:\n1/4 [Hook post]\n2/4 [Concept detail]\n3/4 [Key takeaway]\n4/4 [Action CTA]\n\nInstagram Caption:\n[Write complete, unique Instagram caption with emojis and hashtags]\n\nDAY 2\n\nLinkedIn Post:\n[Write complete, unique LinkedIn post about Day 2 Step-by-step How-To]\n\nX Thread:\n1/4 [Post 1]\n2/4 [Post 2]\n3/4 [Post 3]\n4/4 [Post 4]\n\nInstagram Caption:\n[Write complete, unique Instagram caption for Day 2]\n\nDAY 3\n\nLinkedIn Post:\n[Write complete, unique LinkedIn post about Day 3 Mistakes to avoid]\n\nX Thread:\n1/4 [Post 1]\n2/4 [Post 2]\n3/4 [Post 3]\n4/4 [Post 4]\n\nInstagram Caption:\n[Write complete, unique Instagram caption for Day 3]\n\nDAY 4\n\nLinkedIn Post:\n[Write complete, unique LinkedIn post about Day 4 Pro Tactics & Tools]\n\nX Thread:\n1/4 [Post 1]\n2/4 [Post 2]\n3/4 [Post 3]\n4/4 [Post 4]\n\nInstagram Caption:\n[Write complete, unique Instagram caption for Day 4]\n\nDAY 5\n\nLinkedIn Post:\n[Write complete, unique LinkedIn post about Day 5 Myths & Perspectives]\n\nX Thread:\n1/4 [Post 1]\n2/4 [Post 2]\n3/4 [Post 3]\n4/4 [Post 4]\n\nInstagram Caption:\n[Write complete, unique Instagram caption for Day 5]\n\nDAY 6\n\nLinkedIn Post:\n[Write complete, unique LinkedIn post about Day 6 Future Outlook & Trends]\n\nX Thread:\n1/4 [Post 1]\n2/4 [Post 2]\n3/4 [Post 3]\n4/4 [Post 4]\n\nInstagram Caption:\n[Write complete, unique Instagram caption for Day 6]\n\nDAY 7\n\nLinkedIn Post:\n[Write complete, unique LinkedIn post about Day 7 Roadmap & Summary]\n\nX Thread:\n1/4 [Post 1]\n2/4 [Post 2]\n3/4 [Post 3]\n4/4 [Post 4]\n\nInstagram Caption:\n[Write complete, unique Instagram caption for Day 7]",
         "options": {
           "systemMessage": "You are a professional social media content strategist. Always return three clearly labelled drafts: LinkedIn, X (Twitter) and Instagram."
         }
       },
-      "id": "90e0e23a-7a4f-4bcc-a4bd-6cd4a3326e36",
+      "id": "5bbf8b13-6719-42e8-b66a-202b3cb904db",
       "name": "AI Agent",
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 3.1,
       "position": [
-        496,
-        528
+        288,
+        496
       ],
       "onError": "continueErrorOutput"
     },
     {
       "parameters": {
-        "jsCode": "\nconst data = $input.first().json;\n\n// 1. AI Agent output\nconst output = String(\n  data.output ?? data.text ?? data.response ?? \"\"\n).trim();\n\nif (!output) {\n  throw new Error(\n    \"AI Agent output empty hai. Input check karein.\"\n  );\n}\n\n// 2. Original Telegram brief\nconst brief = String(\n  $(\"Telegram Trigger\").first().json.message?.text ?? \"\"\n);\n\n// 3. Brief fields\nfunction getBriefField(labels) {\n  for (const label of labels) {\n    const regex = new RegExp(\n      \"^\\\\s*\" + label + \"\\\\s*:\\\\s*(.+?)\\\\s*$\",\n      \"im\"\n    );\n\n    const match = brief.match(regex);\n    if (match) return match[1].trim();\n  }\n\n  return \"\";\n}\n\nconst idea =\n  getBriefField([\"Content Idea\", \"Idea\", \"Topic\"]) ||\n  \"Not provided\";\n\nconst audience =\n  getBriefField([\"Target Audience\", \"Audience\", \"Target\"]) ||\n  \"Not provided\";\n\nconst tone =\n  getBriefField([\"Brand Tone\", \"Tone\", \"Brand Voice\"]) ||\n  \"Not provided\";\n\n// 4. Normalize AI output\nconst text = output.replace(/\\\\n/g, \"\\n\");\n\n// 5. Find DAY 1 to DAY 7\nconst dayRegex = /^\\s*DAY\\s+([1-7])\\s*:?\\s*$/gim;\n\nconst headings = [];\nlet match;\n\nwhile ((match = dayRegex.exec(text)) !== null) {\n  headings.push({\n    day: Number(match[1]),\n    start: match.index,\n    end: dayRegex.lastIndex\n  });\n}\n\n// Keep first occurrence of each day\nconst uniqueDays = [];\nconst seenDays = new Set();\n\nfor (const heading of headings) {\n  if (!seenDays.has(heading.day)) {\n    seenDays.add(heading.day);\n    uniqueDays.push(heading);\n  }\n}\n\nuniqueDays.sort((a, b) => a.day - b.day);\n\nif (\n  uniqueDays.length !== 7 ||\n  ![1, 2, 3, 4, 5, 6, 7].every(\n    day => seenDays.has(day)\n  )\n) {\n  throw new Error(\n    `Exactly DAY 1 to DAY 7 required. Found ${uniqueDays.length} unique days.`\n  );\n}\n\n// 6. Extract platform sections\nfunction extractSection(section, platform) {\n  const patterns = {\n    linkedin:\n      /^\\s*(?:\\*\\*)?\\s*LinkedIn(?:\\s+Post)?\\s*:?\\s*(?:\\*\\*)?\\s*/im,\n\n    x:\n      /^\\s*(?:\\*\\*)?\\s*(?:X|Twitter)(?:\\s+Thread)?\\s*:?\\s*(?:\\*\\*)?\\s*/im,\n\n    instagram:\n      /^\\s*(?:\\*\\*)?\\s*Instagram(?:\\s+Caption)?\\s*:?\\s*(?:\\*\\*)?\\s*/im\n  };\n\n  const found = patterns[platform].exec(section);\n  if (!found) return \"\";\n\n  const start = found.index + found[0].length;\n  const lines = section.slice(start).split(\"\\n\");\n  const contentLines = [];\n\n  const nextHeading =\n    /^\\s*(?:\\*\\*)?\\s*(?:LinkedIn(?:\\s+Post)?|(?:X|Twitter)(?:\\s+Thread)?|Instagram(?:\\s+Caption)?)\\s*:?\\s*(?:\\*\\*)?\\s*$/i;\n\n  for (const line of lines) {\n    if (nextHeading.test(line)) break;\n    contentLines.push(line);\n  }\n\n  return contentLines\n    .join(\"\\n\")\n    .trim()\n    .replace(/\\n{3,}/g, \"\\n\\n\");\n}\n\n// 7. Create seven rows with unique IDs\nconst executionId = String($execution.id);\n\nreturn uniqueDays.map(({ day }, index) => {\n  const currentIndex = uniqueDays.findIndex(\n    item => item.day === day\n  );\n\n  const heading = uniqueDays[currentIndex];\n  const next = uniqueDays[currentIndex + 1];\n\n  const section = text.slice(\n    heading.end,\n    next ? next.start : text.length\n  );\n\n  const linkedin = extractSection(section, \"linkedin\");\n  const xThread = extractSection(section, \"x\");\n  const instagram = extractSection(section, \"instagram\");\n\n  if (!linkedin || !xThread || !instagram) {\n    throw new Error(\n      `DAY ${day}: LinkedIn, X Thread, ya Instagram content missing hai.`\n    );\n  }\n\n  return {\n    json: {\n      Content_ID: `${executionId}-${day}`,\n      Content_Idea: idea,\n      Target_Audience: audience,\n      Brand_Tone: tone,\n      LinkedIn_Post: linkedin,\n      X_Thread: xThread,\n      Instagram_Caption: instagram,\n      Approval_Status: \"PENDING\",\n      Scheduled_Date: \"\",\n      Approved_At: \"\"\n    }\n  };\n});\n\n\n\n\n"
+        "jsCode": "const data = $input.first().json;\n\n// 1. AI Agent output\nconst output = String(\n  data.output ?? data.text ?? data.response ?? \"\"\n).trim();\n\nif (!output) {\n  throw new Error(\"AI Agent output empty hai. Input check karein.\");\n}\n\n// 2. Original Telegram brief\nconst brief = String(\n  $(\"Telegram Trigger\").first().json.message?.text ?? \"\"\n);\n\n// 3. Brief fields extraction\nfunction getBriefField(labels) {\n  for (const label of labels) {\n    const regex = new RegExp(\n      \"^\\\\s*\" + label + \"\\\\s*:\\\\s*(.+?)\\\\s*$\",\n      \"im\"\n    );\n\n    const match = brief.match(regex);\n    if (match) return match[1].trim();\n  }\n\n  return \"\";\n}\n\nconst idea =\n  getBriefField([\"Content Idea\", \"Idea\", \"Topic\"]) ||\n  \"Not provided\";\n\nconst audience =\n  getBriefField([\"Target Audience\", \"Audience\", \"Target\"]) ||\n  \"Not provided\";\n\nconst tone =\n  getBriefField([\"Brand Tone\", \"Tone\", \"Brand Voice\"]) ||\n  \"Not provided\";\n\n// 4. Normalize AI output text\nconst text = output.replace(/\\\\n/g, \"\\n\");\n\n// 5. Robust Regex for finding DAY 1 to DAY 7 (Supports **, ##, colons, spaces)\nconst dayRegex = /(?:^|\\n)\\s*(?:#+|\\*\\*|\\*)?\\s*DAY\\s+([1-7])\\b[^\\n]*/gim;\n\nconst headings = [];\nlet match;\n\nwhile ((match = dayRegex.exec(text)) !== null) {\n  headings.push({\n    day: Number(match[1]),\n    start: match.index,\n    end: dayRegex.lastIndex\n  });\n}\n\n// Keep first occurrence of each day\nconst uniqueDays = [];\nconst seenDays = new Set();\n\nfor (const heading of headings) {\n  if (!seenDays.has(heading.day)) {\n    seenDays.add(heading.day);\n    uniqueDays.push(heading);\n  }\n}\n\nuniqueDays.sort((a, b) => a.day - b.day);\n\nif (\n  uniqueDays.length !== 7 ||\n  ![1, 2, 3, 4, 5, 6, 7].every(day => seenDays.has(day))\n) {\n  throw new Error(\n    `Exactly DAY 1 to DAY 7 required. Found ${uniqueDays.length} unique days.`\n  );\n}\n\n// 6. Extract platform sections\nfunction extractSection(section, platform) {\n  const patterns = {\n    linkedin:\n      /^\\s*(?:\\*\\*|#+)?\\s*LinkedIn(?:\\s+Post)?\\s*:?\\s*(?:\\*\\*)?\\s*/im,\n\n    x:\n      /^\\s*(?:\\*\\*|#+)?\\s*(?:X|Twitter)(?:\\s+Thread)?\\s*:?\\s*(?:\\*\\*)?\\s*/im,\n\n    instagram:\n      /^\\s*(?:\\*\\*|#+)?\\s*Instagram(?:\\s+Caption)?\\s*:?\\s*(?:\\*\\*)?\\s*/im\n  };\n\n  const found = patterns[platform].exec(section);\n  if (!found) return \"\";\n\n  const start = found.index + found[0].length;\n  const lines = section.slice(start).split(\"\\n\");\n  const contentLines = [];\n\n  const nextHeading =\n    /^\\s*(?:\\*\\*|#+)?\\s*(?:LinkedIn(?:\\s+Post)?|(?:X|Twitter)(?:\\s+Thread)?|Instagram(?:\\s+Caption)?)\\s*:?\\s*(?:\\*\\*)?\\s*$/i;\n\n  for (const line of lines) {\n    if (nextHeading.test(line)) break;\n    contentLines.push(line);\n  }\n\n  return contentLines\n    .join(\"\\n\")\n    .trim()\n    .replace(/\\n{3,}/g, \"\\n\\n\");\n}\n\n// 7. Create 7 rows for Google Sheets\nconst executionId = String($execution.id);\n\nreturn uniqueDays.map(({ day }, index) => {\n  const currentIndex = uniqueDays.findIndex(item => item.day === day);\n  const heading = uniqueDays[currentIndex];\n  const next = uniqueDays[currentIndex + 1];\n\n  const section = text.slice(\n    heading.end,\n    next ? next.start : text.length\n  );\n\n  const linkedin = extractSection(section, \"linkedin\");\n  const xThread = extractSection(section, \"x\");\n  const instagram = extractSection(section, \"instagram\");\n\n  if (!linkedin || !xThread || !instagram) {\n    throw new Error(\n      `DAY ${day}: LinkedIn, X Thread, ya Instagram content missing hai.`\n    );\n  }\n\n  return {\n    json: {\n      Content_ID: `${executionId}-${day}`,\n      Content_Idea: idea,\n      Target_Audience: audience,\n      Brand_Tone: tone,\n      LinkedIn_Post: linkedin,\n      X_Thread: xThread,\n      Instagram_Caption: instagram,\n      Approval_Status: \"PENDING\",\n      Scheduled_Date: \"\",\n      Approved_At: \"\"\n    }\n  };\n});"
       },
-      "id": "48260ffd-016a-48fa-918d-4ede3f7e92ae",
+      "id": "ef161d77-c028-46ef-ab39-8c27ff1193a2",
       "name": "Code",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        896,
-        624
+        688,
+        592
       ]
     },
     {
       "parameters": {
         "chatId": "={{ $('Telegram Trigger').first().json.message.chat.id }}",
-        "text": "=\n{{\n  (() => {\n    const d = $('Code').first().json;\n\n    const linkedin =\n      d.linkedin_post ?? d.LinkedIn_Post ??\n      d['LinkedIn Post'] ?? d.linkedinPost;\n\n    const xthread =\n      d.x_thread ?? d.X_Thread ??\n      d['X Thread'] ?? d.xThread;\n\n    const instagram =\n      d.instagram_caption ?? d.Instagram_Caption ??\n      d['Instagram Caption'] ?? d.instagramCaption;\n\n    return (\n      'LinkedIn Post:\\n\\n' + (linkedin ?? 'Content field not found') +\n      '\\n\\n--------------------\\n\\n' +\n      'X Thread:\\n\\n' + (xthread ?? 'Content field not found') +\n      '\\n\\n--------------------\\n\\n' +\n      'Instagram Caption:\\n\\n' + (instagram ?? 'Content field not found')\n    );\n  })()\n}}\n",
+        "text": "={{\n  (() => {\n    const d = $json;\n\n    // Day Extract karne ke liye (Content_ID = \"529-1\", \"529-2\" etc.)\n    const dayNumber = String(d.Content_ID || '').split('-')[1] || '';\n    const dayHeader = dayNumber ? `📅 DAY ${dayNumber}\\n\\n` : '';\n\n    const linkedin =\n      d.LinkedIn_Post ?? d.linkedin_post ??\n      d['LinkedIn Post'] ?? d.linkedinPost;\n\n    const xthread =\n      d.X_Thread ?? d.x_thread ??\n      d['X Thread'] ?? d.xThread;\n\n    const instagram =\n      d.Instagram_Caption ?? d.instagram_caption ??\n      d['Instagram Caption'] ?? d.instagramCaption;\n\n    return (\n      dayHeader +\n      'LinkedIn Post:\\n\\n' + (linkedin ?? 'Content field not found') +\n      '\\n\\n--------------------\\n\\n' +\n      'X Thread:\\n\\n' + (xthread ?? 'Content field not found') +\n      '\\n\\n--------------------\\n\\n' +\n      'Instagram Caption:\\n\\n' + (instagram ?? 'Content field not found')\n    );\n  })()\n}}",
         "additionalFields": {}
       },
-      "id": "5132fe6a-194d-4ec7-b153-2ffcf7bceb04",
+      "id": "e34331ba-2cb4-4ca1-9d1a-879a601847bb",
       "name": "Send a text message2",
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        1056,
-        624
+        848,
+        592
       ],
       "webhookId": "e4735732-a427-4cff-809f-c27175593d69",
       "credentials": {
         "telegramApi": {
-          "id": "lRU2BwpGaXgMPbuC",
-          "name": "Telegram account 2"
+          "id": "HPUd49h5Q5fC0beN",
+          "name": "Telegram account"
         }
       }
     },
@@ -278,19 +278,19 @@
         "text": "={{ \n  'Please review the sent draft.\\n\\n' +\n  'Reply APPROVE ' + $('Code').item.json.Content_ID + ' to approve the content.\\n\\n' +\n  'Reply REJECT ' + $('Code').item.json.Content_ID + ' to reject the content and provide a suggestion, if any.\\n\\n' +\n  'Content ID: ' + $('Code').item.json.Content_ID\n}}\n",
         "additionalFields": {}
       },
-      "id": "b1dda56e-59a3-4c35-a71f-f7bec4286100",
+      "id": "ebeafa3e-25cb-4504-b901-07f70634d3af",
       "name": "Send a text message3",
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        1248,
-        624
+        1040,
+        592
       ],
       "webhookId": "c0f9a812-059d-4ec9-873b-d995984c0a4e",
       "credentials": {
         "telegramApi": {
-          "id": "lRU2BwpGaXgMPbuC",
-          "name": "Telegram account 2"
+          "id": "HPUd49h5Q5fC0beN",
+          "name": "Telegram account"
         }
       }
     },
@@ -303,16 +303,16 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        1376,
-        32
+        1168,
+        0
       ],
-      "id": "f0312f4f-3b15-430f-95a8-9c9b286ff188",
+      "id": "fe904aa2-a679-49b0-a751-19a9cbf1a16c",
       "name": "Send a text message1",
       "webhookId": "0e482e29-d973-4243-9c2b-092ede1877ae",
       "credentials": {
         "telegramApi": {
-          "id": "lRU2BwpGaXgMPbuC",
-          "name": "Telegram account 2"
+          "id": "HPUd49h5Q5fC0beN",
+          "name": "Telegram account"
         }
       }
     },
@@ -325,16 +325,16 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        1376,
-        192
+        1168,
+        160
       ],
-      "id": "f952a5ea-a85a-4f94-9762-c0800442a7e5",
+      "id": "fa10ecde-8053-4e94-ac3d-174629b5e5ae",
       "name": "Send a text message",
       "webhookId": "0bb25160-0131-4cc6-b712-60a237075679",
       "credentials": {
         "telegramApi": {
-          "id": "lRU2BwpGaXgMPbuC",
-          "name": "Telegram account 2"
+          "id": "HPUd49h5Q5fC0beN",
+          "name": "Telegram account"
         }
       }
     },
@@ -342,13 +342,13 @@
       "parameters": {
         "jsCode": "const data = $input.first().json;\n\n// Telegram message extract\nconst message = String(\n  data.message?.text ??\n  data.text ??\n  \"\"\n).trim();\n\n// Chat ID extract\nconst chat_id =\n  data.message?.chat?.id ??\n  data.chat?.id ??\n  data.chat_id;\n\n// Validate message\nif (!message) {\n  throw new Error(\"Telegram message nahi mila.\");\n}\n\nif (chat_id === undefined || chat_id === null) {\n  throw new Error(\"Chat ID nahi mili.\");\n}\n\n// Regex to extract APPROVE/REJECT and Content ID (e.g. 363-7)\nconst match = message.match(/(APPROVE|REJECT)\\s+(\\d+-\\d+)/i);\n\nif (!match) {\n  throw new Error(\n    \"Invalid command. Telegram par APPROVE 46-1 ya REJECT 46-1 bhejo.\"\n  );\n}\n\nconst action = match[1].toUpperCase();\nconst contentId = match[2];\n\nconst approvalStatus =\n  action === \"APPROVE\" ? \"Approved\" : \"Rejected\";\n\n// Agar Approve ho toh Kolkata timestamp, agar Reject ho toh Blank String \"\"\nconst approvedAt =\n  action === \"APPROVE\"\n    ? new Date().toLocaleString(\"sv-SE\", {\n        timeZone: \"Asia/Kolkata\"\n      }).replace(\" \", \"T\")\n    : \"\";\n\n// Agar Reject ho toh Scheduled Date ko bhi blank string \"\" kar do\nconst scheduledDate = action === \"REJECT\" ? \"\" : undefined;\n\n// Output matching your exact Google Sheets columns and workflow needs\nreturn [\n  {\n    json: {\n      action: action,\n      content_id: contentId,            // Telegram nodes ke liye\n      Content_ID: contentId,            // Google Sheet column match\n      Approval_Status: approvalStatus,  // Google Sheet column match\n      chat_id: chat_id,\n      Approved_At: approvedAt,          // Google Sheet column match (Rejection par blank)\n      Scheduled_Date: scheduledDate      // Google Sheet column match (Rejection par blank)\n    }\n  }\n];"
       },
-      "id": "c4f9be51-cdf4-4618-833d-38f57c5ec421",
+      "id": "355a9fc8-0956-4845-9a3a-0f73a18f704a",
       "name": "Analyzer",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        672,
-        112
+        464,
+        80
       ]
     },
     {
@@ -379,31 +379,31 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        1152,
-        112
+        944,
+        80
       ],
-      "id": "ecada1d9-973c-4226-871c-9140fa4e06fc",
+      "id": "e92656b9-5b12-4942-ad22-689123028b73",
       "name": "If"
     },
     {
       "parameters": {
         "chatId": "={{ $('Telegram Trigger').first().json.message.chat.id }}",
-        "text": "=⚠️ Content Generation Failed\n\nSorry, I couldn't generate your social media content because the AI service encountered an error.\n\nYour AI service is temporarily unavailable or has reached its usage limit.\n\n📝 **Your Original Idea:**\n> {{ $json.original_message }}\n\nPlease try again later.",
+        "text": "=⚠️ Content Generation Failed\n\nSorry, I couldn't generate your social media content because the AI service encountered an error.\n\nYour AI service is temporarily unavailable or has reached its usage limit.\n\n📝 **Your Original Brief Details:**\n• **Idea:** {{ ($('Telegram Trigger').first().json.message.text.match(/(?:Content Idea|Idea|Topic)\\s*:\\s*(.+)/i) || [])[1]?.trim() || \"Not provided\" }}\n• **Audience:** {{ ($('Telegram Trigger').first().json.message.text.match(/(?:Target Audience|Audience|Target)\\s*:\\s*(.+)/i) || [])[1]?.trim() || \"Not provided\" }}\n• **Tone:** {{ ($('Telegram Trigger').first().json.message.text.match(/(?:Brand Tone|Tone|Voice)\\s*:\\s*(.+)/i) || [])[1]?.trim() || \"Not provided\" }}\n\nPlease try again later.",
         "additionalFields": {}
       },
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        752,
-        704
+        544,
+        672
       ],
-      "id": "375be376-d99b-46c2-b926-24b8d4b32147",
+      "id": "8e463b94-6622-4f66-a59f-17d2c3c496b7",
       "name": "Send a text message4",
       "webhookId": "d210cf05-fe3e-4b99-99de-0c5609f8a35f",
       "credentials": {
         "telegramApi": {
-          "id": "lRU2BwpGaXgMPbuC",
-          "name": "Telegram account 2"
+          "id": "HPUd49h5Q5fC0beN",
+          "name": "Telegram account"
         }
       }
     },
@@ -547,14 +547,14 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        1408,
-        336
+        1200,
+        304
       ],
-      "id": "330b5e04-647a-4358-9232-c20ad272cf2f",
+      "id": "024f2521-46ab-4368-863e-6333e08e4f8a",
       "name": "Update row in sheet1",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "5nPCRzd8SARwWkeJ",
+          "id": "enyKgV108mZPDA2D",
           "name": "Google Sheets account"
         }
       }
@@ -566,28 +566,30 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1248,
-        336
+        1040,
+        304
       ],
-      "id": "3a3a06e9-820e-4efc-9c69-724edc3d9649",
+      "id": "86fa9739-3465-4aeb-bfbf-0d448e1327f9",
       "name": "Schedule_Analyzer"
     },
     {
       "parameters": {
-        "options": {}
+        "options": {
+          "temperature": 1
+        }
       },
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1.2,
       "position": [
-        496,
-        720
+        288,
+        688
       ],
-      "id": "357c3dbd-4a52-4b1e-b4de-150e0e9a7a13",
+      "id": "52ca81c3-9009-45f4-8847-484deadd2f8e",
       "name": "Google Gemini Chat Model",
       "credentials": {
         "googlePalmApi": {
-          "id": "YmDXtx24wl2n97wQ",
-          "name": "Google Gemini(PaLM) Api account 3"
+          "id": "FIlWpmzk44ud5v5x",
+          "name": "Google Gemini(PaLM) Api account"
         }
       }
     },
@@ -670,10 +672,10 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        400,
-        256
+        192,
+        224
       ],
-      "id": "b40ad51a-8b6d-4106-a973-70fd7113313b",
+      "id": "64f91c7a-3694-438c-863e-b47bcd063b7a",
       "name": "Switch"
     },
     {
@@ -814,14 +816,14 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        832,
-        304
+        624,
+        272
       ],
-      "id": "4a8ef7c5-cff8-43a1-955b-dea8a0d7fe1e",
+      "id": "2fcaeb69-aa38-4c28-9fc3-93f1b3202910",
       "name": "Update row in sheet2",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "5nPCRzd8SARwWkeJ",
+          "id": "enyKgV108mZPDA2D",
           "name": "Google Sheets account"
         }
       }
@@ -835,16 +837,16 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        992,
-        304
+        784,
+        272
       ],
-      "id": "2ecbcc5b-d3bb-49cd-8524-1b0e3b614cb4",
+      "id": "ff0a218d-c373-423e-9a5a-e4bb89d6e3e1",
       "name": "Send a text message6",
       "webhookId": "b37cf08d-c2a9-4f34-a5fa-a2024fdaabe9",
       "credentials": {
         "telegramApi": {
-          "id": "lRU2BwpGaXgMPbuC",
-          "name": "Telegram account 2"
+          "id": "HPUd49h5Q5fC0beN",
+          "name": "Telegram account"
         }
       }
     },
@@ -855,10 +857,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        672,
-        304
+        464,
+        272
       ],
-      "id": "683a2e9a-bcf8-455d-90e2-995617dc7aa0",
+      "id": "269b5327-6102-4ac2-b7f3-03ca1f647ce3",
       "name": "Schedule_Analyzer1"
     },
     {
@@ -879,14 +881,14 @@
       "type": "n8n-nodes-base.googleCalendar",
       "typeVersion": 1.3,
       "position": [
-        800,
-        464
+        592,
+        432
       ],
-      "id": "d50f1105-2008-4236-8476-436c267d2555",
+      "id": "bc73fb07-6069-44eb-8af7-1ca1ec454771",
       "name": "Create an event",
       "credentials": {
         "googleCalendarOAuth2Api": {
-          "id": "70k4D59dbM8ZcnZJ",
+          "id": "d9ugn7lPQDsdZ7Pi",
           "name": "Google Calendar account"
         }
       }
@@ -1024,14 +1026,14 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        1040,
-        800
+        848,
+        432
       ],
-      "id": "2c38fbaf-017a-4c36-837b-a9616ab01a66",
+      "id": "9d1c813c-186a-4b88-a518-1e1716532048",
       "name": "Append or update row in sheet",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "5nPCRzd8SARwWkeJ",
+          "id": "enyKgV108mZPDA2D",
           "name": "Google Sheets account"
         }
       }
@@ -1151,11 +1153,6 @@
         ]
       ]
     },
-    "Update row in sheet1": {
-      "main": [
-        []
-      ]
-    },
     "Schedule_Analyzer": {
       "main": [
         [
@@ -1210,11 +1207,6 @@
         ]
       ]
     },
-    "Send a text message": {
-      "main": [
-        []
-      ]
-    },
     "Update row in sheet2": {
       "main": [
         [
@@ -1241,27 +1233,19 @@
           }
         ]
       ]
-    },
-    "Send a text message1": {
-      "main": [
-        []
-      ]
     }
   },
   "active": true,
   "settings": {
     "executionOrder": "v1",
-    "binaryMode": "separate",
-    "timeSavedMode": "fixed",
-    "callerPolicy": "workflowsFromSameOwner",
-    "availableInMCP": false
+    "binaryMode": "separate"
   },
-  "versionId": "5aa27fd3-ca90-48b3-bb70-3d77475669b8",
+  "versionId": "d22d41ce-2fba-43a6-9957-ebc86457e320",
   "meta": {
     "templateCredsSetupCompleted": true,
-    "instanceId": "474fa557ee8f534137f25afd86b5eadb2ab268153676a35b219d84c361ac9a3c"
+    "instanceId": "f16edf01dfa2226b6a2fb6c6dd9443544f6395b495e882c2ca754b07ae73be61"
   },
   "nodeGroups": [],
-  "id": "FyLskNbyYRBdJFUL",
+  "id": "qUqfvJGsVRoMOriQ",
   "tags": []
 }
